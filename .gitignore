@@ -1,1 +1,17 @@
 inverter/venv/
+
+# HA version tracking
+ha_config/.HA_VERSION
+
+# HA database and runtime
+ha_config/home-assistant_v2.db*
+ha_config/home-assistant.log*
+ha_config/.storage/
+
+# Mosquitto runtime and logs
+mosquitto/data/
+mosquitto/log/
+
+# Python backups
+inverter/*.py.bak
+__pycache__/

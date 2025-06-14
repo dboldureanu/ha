@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - ./ha_config:/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Europe/Chisinau
+    restart: unless-stopped
+    network_mode: host  # required for HA to discover devices on the network
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"  # optional web socket support
+    restart: unless-stopped
+
